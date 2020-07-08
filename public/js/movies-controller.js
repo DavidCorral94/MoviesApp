@@ -127,6 +127,7 @@ angular.module("MoviesApp").controller("MoviesController", function($scope, $htt
                 .then(function(response) {
                     console.log('User logged', response);
                     $scope.token = response.data.token;
+                    $scope.setToken();
                     alert('User logged and token loaded in input!');
                 }, function(error) {
                     console.log('Error adding movie', error);
