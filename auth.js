@@ -1,5 +1,4 @@
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
 const localStrategy = require('passport-local').Strategy;
 const usersService = require('./routes/users-service');
 const JWTstrategy = require('passport-jwt').Strategy;
@@ -35,3 +34,17 @@ passport.use('login', new localStrategy({
         return done(error, false, { message: 'Server Error' });
     }
 }));
+
+//Middleware that checks if the token is valid
+passport.use(new JWTstrategy({
+    secretOrKey: 'top_secret',
+    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken('secret_token')
+}, async (token, done) => {
+    try {
+        return done(null, token.user);
+    } catch (error) {
+        done(error);
+    }
+}));
+
+module.exports = passport;
