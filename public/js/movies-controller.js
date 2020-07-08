@@ -48,4 +48,17 @@ angular.module("MoviesApp").controller("MoviesController", function($scope, $htt
         }
     }
 
+    $scope.removeOneMovie = function() {
+        console.log('Removing a movie by id: ', $scope.movieId);
+        if ($scope.movieId != "") {
+            $http.delete("/movies/" + $scope.movieId)
+                .then(function(response) {
+                    console.log('Movie removed', response.data);
+                    alert('Movie has been removed!')
+                }, function(error) {
+                    console.log('Error removing the movie', error);
+                    alert("Ups! Something went wrong when removing the movie");
+                });
+        }
+    }
 });
