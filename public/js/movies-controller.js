@@ -106,6 +106,21 @@ angular.module("MoviesApp").controller("MoviesController", function($scope, $htt
             });
     }
 
+    $scope.registerUser = function() {
+        if ($scope.email != undefined && $scope.password != undefined) {
+            $http.post("/signup", { email: $scope.email, password: $scope.password })
+                .then(function(response) {
+                    console.log('User added', response);
+                    alert('User registered!');
+                }, function(error) {
+                    console.log('Error adding user', error);
+                    alert("Ups! Something went wrong when creating the user");
+                });
+        } else {
+            alert('All fields have to be completed!');
+        }
+    }
+
     function refresh() {
         $scope.loadMovies();
     }
