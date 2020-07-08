@@ -29,4 +29,23 @@ angular.module("MoviesApp").controller("MoviesController", function($scope, $htt
                 });
         }
     }
+
+    $scope.newMovie = {};
+
+    $scope.addMovie = function() {
+        if ($scope.newMovie.title != undefined && $scope.newMovie.director != undefined && $scope.newMovie.year != undefined && $scope.newMovie.category != undefined) {
+            $http.post("/movies", $scope.newMovie)
+                .then(function(response) {
+                    console.log('Movie added', response);
+                    $scope.newMovie = {};
+                    alert('Movie created!');
+                }, function(error) {
+                    console.log('Error adding movie', error);
+                    alert("Ups! Something went wrong when creating the movie");
+                });
+        } else {
+            alert('All fields have to be completed!');
+        }
+    }
+
 });

@@ -47,6 +47,27 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" ng-model="newMovie.title">
+                </div>
+                <div class="form-group">
+                    <label for="director">Director</label>
+                    <input type="text" class="form-control" id="director" ng-model="newMovie.director">
+                </div>
+                <div class="form-group">
+                    <label for="year">Year</label>
+                    <input type="number" class="form-control" id="year" ng-model="newMovie.year">
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <input type="text" class="form-control" id="category" ng-model="newMovie.category">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2" ng-click="addMovie();">Add Movie</button>
+            </div>
+        </div>
     </div>
 </body>
 
