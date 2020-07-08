@@ -30,6 +30,14 @@ app.use('/moviesSQL', moviesSQL);
 
 app.use('/', express.static(path.join(__dirname + '/public')));
 
+app.post('/signup', passport.authenticate('signup', { session: false }), async (req, res, next) => {
+    res.json({
+        message: 'Signup successful',
+        user: req.user
+    });
+});
+
+
 const server = http.createServer(app);
 
 moviesService.connectDb((err) => {
