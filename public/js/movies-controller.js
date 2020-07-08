@@ -4,6 +4,10 @@ angular.module("MoviesApp").controller("MoviesController", function($scope, $htt
     $scope.movie;
     $scope.movies = [];
 
+    $scope.setToken = function() {
+        $http.defaults.headers.common['Authorization'] = 'Bearer ' + $scope.token;
+    };
+
     $scope.loadMovies = function() {
         console.log('Loading all movies');
         $http.get("/movies")
@@ -103,7 +107,7 @@ angular.module("MoviesApp").controller("MoviesController", function($scope, $htt
     }
 
     function refresh() {
-       $scope.loadMovies(); 
+        $scope.loadMovies();
     }
 
 });

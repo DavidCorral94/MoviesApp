@@ -14,6 +14,10 @@
             <h1>MovieApp</h1>
         </div>
         <hr>
+        <div class="row" style="margin: 15px">
+            <label>API Token</label>
+            <input type="text" class="form-control" placeholder="JWT token" aria-label="token" aria-describedby="basic-addon2" ng-model="token" ng-change="setToken()">
+        </div>
         <div class="row">
             <div class="col-md-6 text-center">
                 <button type="button" class="btn btn-primary" ng-click="loadMovies()" style="margin-bottom: 16px">Load All Movies</button>
