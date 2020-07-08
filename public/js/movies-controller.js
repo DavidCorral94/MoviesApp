@@ -23,6 +23,7 @@ angular.module("MoviesApp").controller("MoviesController", function($scope, $htt
                 .then(function(response) {
                     console.log('Movie retrieved', response.data);
                     $scope.movie = response.data[0];
+                    $scope.newMovie = response.data[0];
                 }, function(error) {
                     console.log('Error retrieving movies', error);
                     alert("Ups! Something went wrong when recovering the movie");
@@ -38,7 +39,7 @@ angular.module("MoviesApp").controller("MoviesController", function($scope, $htt
                 .then(function(response) {
                     console.log('Movie added', response);
                     $scope.newMovie = {};
-                    alert('Movie created!');
+                    refresh();
                 }, function(error) {
                     console.log('Error adding movie', error);
                     alert("Ups! Something went wrong when creating the movie");
@@ -54,7 +55,8 @@ angular.module("MoviesApp").controller("MoviesController", function($scope, $htt
             $http.delete("/movies/" + $scope.movieId)
                 .then(function(response) {
                     console.log('Movie removed', response.data);
-                    alert('Movie has been removed!')
+                    //alert('Movie has been removed!')
+                    refresh();
                 }, function(error) {
                     console.log('Error removing the movie', error);
                     alert("Ups! Something went wrong when removing the movie");
@@ -98,6 +100,10 @@ angular.module("MoviesApp").controller("MoviesController", function($scope, $htt
                 console.log('Error updating movie', error);
                 alert("Ups! Something went wrong when updating the movie");
             });
+    }
+
+    function refresh() {
+       $scope.loadMovies(); 
     }
 
 });
