@@ -121,6 +121,22 @@ angular.module("MoviesApp").controller("MoviesController", function($scope, $htt
         }
     }
 
+    $scope.loginUser = function() {
+        if ($scope.email != undefined && $scope.password != undefined) {
+            $http.post("/login", { email: $scope.email, password: $scope.password })
+                .then(function(response) {
+                    console.log('User logged', response);
+                    $scope.token = response.data.token;
+                    alert('User logged and token loaded in input!');
+                }, function(error) {
+                    console.log('Error adding movie', error);
+                    alert("Ups! Something went wrong when loging the user");
+                });
+        } else {
+            alert('All fields have to be completed!');
+        }
+    }
+
     function refresh() {
         $scope.loadMovies();
     }
