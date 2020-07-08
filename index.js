@@ -6,6 +6,11 @@ const PORT = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+const passport = require('passport');
+const usersService = require('./routes/users-service');
+const jwt = require('jsonwebtoken');
+require('./auth.js');
+
 
 app.use(cors());
 app.use(bodyParser.json());
