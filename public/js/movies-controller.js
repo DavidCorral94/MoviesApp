@@ -61,4 +61,17 @@ angular.module("MoviesApp").controller("MoviesController", function($scope, $htt
                 });
         }
     }
+
+    $scope.removeAllMovies = function() {
+        console.log('Removing all movies');
+        $http.delete("/movies")
+            .then(function(response) {
+                console.log('Movies removed', response.data);
+                alert('All movies have been removed!')
+            }, function(error) {
+                console.log('Error removing the movies', error);
+                alert("Ups! Something went wrong when removing the movies");
+            });
+    }
+
 });
