@@ -18,15 +18,15 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-//https://pastebin.com/r1wT3LKv
+
 const moviesService = require('./routes/movies-service');
 const movies = require('./routes/movies');
 
 const moviesServiceSQL = require('./routes/movies-service-sql');
 const moviesSQL = require('./routes/movies-sql');
 
-app.use('/movies', movies);
-app.use('/moviesSQL', moviesSQL);
+app.use('/movies', passport.authenticate('jwt', { session: false }), movies);
+app.use('/moviesSQL', passport.authenticate('jwt', { session: false }), moviesSQL);
 
 app.use('/', express.static(path.join(__dirname + '/public')));
 
@@ -71,7 +71,6 @@ app.get('/profile', passport.authenticate('jwt', { session: false }), (req, res,
 });
 
 const server = http.createServer(app);
-
 
 usersService.connectDb((err) => {
     if (err) {
