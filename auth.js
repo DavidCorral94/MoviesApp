@@ -18,3 +18,20 @@ passport.use('signup', new localStrategy({
         done(error);
     }
 }));
+
+//Create a passport middleware to handle User login
+passport.use('login', new localStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
+}, async (email, password, done) => {
+    try {
+        const user = await usersService.find({ email: email, password: password });
+        if (!user[0]) {
+            return done(null, false, { message: 'User or password incorrect' });
+        } else {
+            return done(null, user[0], { message: 'Logged in successfully' });
+        }
+    } catch (error) {
+        return done(error, false, { message: 'Server Error' });
+    }
+}));
