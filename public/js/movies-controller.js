@@ -74,4 +74,30 @@ angular.module("MoviesApp").controller("MoviesController", function($scope, $htt
             });
     }
 
+    $scope.loadMovieInForm = function() {
+        console.log('Loading movie in form by id: ', $scope.movieId);
+        if ($scope.movieId != "") {
+            $http.get("/movies/" + $scope.movieId)
+                .then(function(response) {
+                    console.log('Movie retrieved', response.data);
+                    $scope.newMovie = response.data[0];
+                }, function(error) {
+                    console.log('Error retrieving the movie', error);
+                    alert("Ups! Something went wrong when recovering the movie");
+                });
+        }
+    }
+
+    $scope.updateMovie = function() {
+        $http.put("/movies/" + $scope.newMovie._id, $scope.newMovie)
+            .then(function(response) {
+                console.log('Movie updated', response);
+                $scope.newMovie = {};
+                alert('Movie has been updated!');
+            }, function(error) {
+                console.log('Error updating movie', error);
+                alert("Ups! Something went wrong when updating the movie");
+            });
+    }
+
 });

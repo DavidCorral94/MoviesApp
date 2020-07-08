@@ -39,6 +39,9 @@
                     <div class="input-group-append">
                         <button class="btn btn-danger" type="button" ng-click="removeOneMovie()">Delete Movie</button>
                     </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-warning" type="button" ng-click="loadMovieInForm()">Load Movie (Form)</button>
+                    </div>
                 </div>
                 <div>
                     <ul class="list-group" ng-if="movie">
@@ -70,6 +73,7 @@
                     <input type="text" class="form-control" id="category" ng-model="newMovie.category">
                 </div>
                 <button type="submit" class="btn btn-primary mb-2" ng-click="addMovie();">Add Movie</button>
+                <button type="submit" class="btn btn-warning mb-2" ng-click="updateMovie();">Update Movie</button>
             </div>
         </div>
     </div>
