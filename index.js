@@ -61,23 +61,39 @@ app.post('/login', async (req, res, next) => {
     })(req, res, next);
 });
 
+app.get('/profile', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    //We'll just send back the user details and the token
+    res.json({
+        message: 'You made it to the secure route',
+        user: req.user,
+        token: req.query.secret_token
+    })
+});
 
 const server = http.createServer(app);
 
-moviesService.connectDb((err) => {
+
+usersService.connectDb((err) => {
     if (err) {
-        console.log('Could not connect with MongoDB – moviesService', err);
+        console.log('Could not connect with MongoDB – usersService', err);
         process.exit(1);
     }
 
-    /*moviesServiceSQL.connectDb((err) => {
+    moviesService.connectDb((err) => {
         if (err) {
-            console.log('Could not connect with MySQL - moviesServiceSQL', err);
+            console.log('Could not connect with MongoDB – moviesService', err);
             process.exit(1);
-        }*/
+        }
 
-    server.listen(PORT, () => {
-        console.log('Server up and running on localhost:' + PORT);
+        /*moviesServiceSQL.connectDb((err) => {
+            if (err) {
+                console.log('Could not connect with MySQL - moviesServiceSQL', err);
+                process.exit(1);
+            }*/
+
+        server.listen(PORT, () => {
+            console.log('Server up and running on localhost:' + PORT);
+        });
+        //});
     });
-    //});
 });
