@@ -26,7 +26,8 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
     let movie = req.body;
-    moviesService.add(movie, (err, result) => {
+    let object = { object: encryption.encrypt(movie) };
+    moviesService.add(object, (err, result) => {
         if (err) {
             res.status(500).send({
                 msg: err
