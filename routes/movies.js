@@ -30,6 +30,7 @@ router.post('/', function(req, res) {
                 msg: err
             });
         } else if (result !== null) {
+            req.app.io.emit('newFilm', 'A new film has been added! Refresh them :)');
             res.status(201).send({
                 msg: 'Film created!'
             });
@@ -86,7 +87,7 @@ router.put('/:_id', function(req, res) {
     });
 });
 
-router.delete('/:_id', function (req, res) {
+router.delete('/:_id', function(req, res) {
     let _id = req.params._id;
     moviesService.remove(_id, (err) => {
         if (err) {
