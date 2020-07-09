@@ -71,6 +71,8 @@ app.get('/profile', passport.authenticate('jwt', { session: false }), (req, res,
 });
 
 const server = http.createServer(app);
+const io = require('socket.io')(server);
+app.io = io;
 
 usersService.connectDb((err) => {
     if (err) {
