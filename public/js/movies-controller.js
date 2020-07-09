@@ -4,6 +4,12 @@ angular.module("MoviesApp").controller("MoviesController", function($scope, $htt
     $scope.movie;
     $scope.movies = [];
 
+    var socket = io();
+    socket.on('newFilm', function(data) {
+        console.log(data);
+        $scope.loadMovies();
+    });
+
     $scope.setToken = function() {
         $http.defaults.headers.common['Authorization'] = 'Bearer ' + $scope.token;
     };
