@@ -3,6 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const moviesService = require('./movies-service');
+const encryption = require('./encrypt.js');
+
 
 /*********** /movies ***********/
 
