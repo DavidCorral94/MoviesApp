@@ -19,7 +19,13 @@ router.get('/', function(req, res) {
                 msg: "movies null"
             });
         } else {
-            res.status(200).send(movies);
+            let result = [];
+            movies.forEach(m => {
+                let aux = encryption.decrypt(m.object);
+                aux._id = m._id;
+                result.push(aux)
+            });
+            res.status(200).send(result);
         }
     });
 });
@@ -69,7 +75,13 @@ router.get('/:_id', function(req, res) {
                 msg: "movies null"
             });
         } else {
-            res.status(200).send(movie);
+            let result = [];
+            movie.forEach(m => {
+                let aux = encryption.decrypt(m.object);
+                aux._id = m._id;
+                result.push(aux)
+            });
+            res.status(200).send(result);
         }
     });
 });
