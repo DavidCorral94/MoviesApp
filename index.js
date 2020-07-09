@@ -74,6 +74,10 @@ const server = http.createServer(app);
 const io = require('socket.io')(server);
 app.io = io;
 
+io.on('connection', (socket) => {
+  console.log('a user connected');
+});
+
 usersService.connectDb((err) => {
     if (err) {
         console.log('Could not connect with MongoDB – usersService', err);
